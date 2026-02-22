@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import { getProductRes } from '../helper/api';
 import { onEntryChange } from '../sdk/entry';
 import Layout from '../components/layout';
@@ -140,6 +140,43 @@ export default function Product() {
           </div>
 
         </div>
+
+        {/* You May Also Like Section */}
+        {data.related_products && data.related_products.length > 0 && (
+          <div className="mt-24 mb-10">
+            <h2 className="text-2xl md:text-3xl font-bold text-stone-900 mb-10 tracking-tight text-center">You May Also Like</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+              {data.related_products.map((product, idx) => (
+                <Link key={idx} to={product.url || `/products/${product.slug}`} className="group block h-full">
+                  <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-stone-100 h-full flex flex-col transform group-hover:-translate-y-1">
+                    <div className="aspect-[4/5] bg-stone-100 relative overflow-hidden">
+                      {product.product_images?.[0]?.url ? (
+                        <img 
+                          src={`${product.product_images[0].url}?format=webply&quality=85`} 
+                          alt={product.title || product.product_name || 'Related Product'} 
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out" 
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center text-stone-300">
+                          <span className="text-sm font-medium">No Image</span>
+                        </div>
+                      )}
+                    </div>
+                    <div className="p-6 flex flex-col flex-grow">
+                      <h3 className="text-lg font-bold text-stone-900 mb-2 group-hover:text-stone-600 transition-colors line-clamp-2">
+                        {product.title || product.product_name}
+                      </h3>
+                      <p className="text-stone-500 font-medium mt-auto">
+                        {product.price ? `$${product.price.toFixed(2)}` : 'Pricing Unavailable'}
+                      </p>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+
       </div>
     </Layout>
   );

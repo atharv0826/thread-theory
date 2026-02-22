@@ -82,15 +82,16 @@ export const getHeaderRes = async (locale = null) => {
 
 export const getProductRes = async (url, locale = null) => {
   try {
-    const response = await Stack.ContentType('product')
-      .Query()
-      .where('url', url)
-      .language(locale || 'en-us')
-      .toJSON()
-      .find();
+    const response = await StackObj.getEntryByUrl({
+      contentTypeUid: "product",
+      entryUrl: url,
+      referenceFieldPath: ["related_products"],
+      locale,
+    });
       
-    if (response && response.length > 0) {
-      const entries = Array.isArray(response[0]) ? response[0] : response;
+    if (response) {
+      // getEntryByUrl might return [[entry], count] or [entry] depending on the internal wrap.
+      const entries = Array.isArray(response[0]) ? response[0] : (Array.isArray(response) ? response : [response]);
       const entry = entries?.[0];
       
       if (entry) {
