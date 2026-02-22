@@ -1,0 +1,369 @@
+[
+  {
+    "uid": "blt0cc6eb06361121fb",
+    "locale": "en-us",
+    "_version": 2,
+    "ACL": {},
+    "_in_progress": false,
+    "created_at": "2026-02-21T13:10:03.981Z",
+    "created_by": "blt01fbcccbf9d25d37",
+    "footer": {
+      "title": "Aurum Apparel Footer",
+      "footer_text": "Designed for comfort. Made for everyday. Shipping across India. Easy returns within 7 days.",
+      "footer_links": [
+        {
+          "label": "Customer Support",
+          "_metadata": {
+            "uid": "cs090ff96ef2167198"
+          },
+          "link": {
+            "title": "Customer Support",
+            "href": "/support"
+          }
+        },
+        {
+          "label": "Shipping & Returns",
+          "_metadata": {
+            "uid": "cs2640bc26c696f827"
+          },
+          "link": {
+            "title": "Shipping & Returns",
+            "href": "/shipping-returns"
+          }
+        },
+        {
+          "label": "Size Guide",
+          "_metadata": {
+            "uid": "csfd3edfced728b466"
+          },
+          "link": {
+            "title": "Size Guide",
+            "href": "/size-guide"
+          }
+        },
+        {
+          "label": "Contact",
+          "_metadata": {
+            "uid": "cs7a02964c0ba79d1a"
+          },
+          "link": {
+            "title": "Contact",
+            "href": "/contact"
+          }
+        },
+        {
+          "label": "Privacy Policy",
+          "_metadata": {
+            "uid": "csf3f5c776d3ab612d"
+          },
+          "link": {
+            "title": "Privacy Policy",
+            "href": "/privacy"
+          }
+        }
+      ],
+      "social_links": [
+        {
+          "platform": "Instagram",
+          "_metadata": {
+            "uid": "csb05881ecbab825cc"
+          },
+          "url": {
+            "title": "Instagram",
+            "href": "https://instagram.com/aurumapparel"
+          }
+        },
+        {
+          "platform": "Facebook",
+          "_metadata": {
+            "uid": "cs867df3878bde8967"
+          },
+          "url": {
+            "title": "Facebook",
+            "href": "https://facebook.com/aurumapparel"
+          }
+        },
+        {
+          "platform": "YouTube",
+          "_metadata": {
+            "uid": "csbc3ea0e1bce59e6b"
+          },
+          "url": {
+            "title": "YouTube",
+            "href": "https://youtube.com/@aurumapparel"
+          }
+        }
+      ],
+      "copyright_text": "© 2026 Aurum Apparel. All rights reserved."
+    },
+    "header": {
+      "title": "Aurum Apparel",
+      "logo": {
+        "uid": "bltf1589b5e9de942a6",
+        "_version": 1,
+        "parent_uid": null,
+        "title": "5_pakain.webp",
+        "created_by": "blt01fbcccbf9d25d37",
+        "updated_by": "blt01fbcccbf9d25d37",
+        "created_at": "2026-02-21T13:11:33.992Z",
+        "updated_at": "2026-02-21T13:11:33.992Z",
+        "content_type": "image/webp",
+        "file_size": "256784",
+        "filename": "5_pakain.webp",
+        "ACL": {},
+        "is_dir": false,
+        "tags": [],
+        "publish_details": {
+          "time": "2026-02-21T14:08:16.861Z",
+          "user": "blt01fbcccbf9d25d37",
+          "environment": "blt4c2aa25b3263bee6",
+          "locale": "en-us"
+        },
+        "url": "https://dev14-images.csnonprod.com/v3/assets/blt646e916fcf4fef2f/bltf1589b5e9de942a6/6999af0579bde8d275102848/5_pakain.webp"
+      },
+      "navigation_links": [
+        {
+          "label": "Shop",
+          "_metadata": {
+            "uid": "csa2a8149a7495b66c"
+          },
+          "link": {
+            "title": "Shop",
+            "href": "/shop"
+          }
+        },
+        {
+          "label": "New Arrivals",
+          "_metadata": {
+            "uid": "cseefac9e9cfd3234d"
+          },
+          "link": {
+            "title": "New Arrivals",
+            "href": "/new-arrivals"
+          }
+        },
+        {
+          "label": "Collections",
+          "_metadata": {
+            "uid": "csc028f6d75776da11"
+          },
+          "link": {
+            "title": "Collections",
+            "href": "/collections/spring"
+          }
+        },
+        {
+          "label": "Sale",
+          "_metadata": {
+            "uid": "cs2311706bbc4d9297"
+          },
+          "link": {
+            "title": "Sale",
+            "href": "/sale"
+          }
+        },
+        {
+          "label": "About",
+          "_metadata": {
+            "uid": "csfad83cf3672d9fb0"
+          },
+          "link": {
+            "title": "About",
+            "href": "/about"
+          }
+        }
+      ],
+      "cta": {
+        "label": "Sign In",
+        "link": {
+          "title": "Sign In",
+          "href": "/account"
+        }
+      }
+    },
+    "page_sections": [
+      {
+        "hero_section": {
+          "heading": "New Season, Better Basics",
+          "_metadata": {
+            "uid": "cs2d36ae3bb2566b2f"
+          },
+          "subheading": "Premium fabrics, clean silhouettes, and everyday comfort—built to last.",
+          "background_image": {
+            "uid": "blt45af74fc2e01f7e7",
+            "_version": 1,
+            "parent_uid": "bltde133697d85d2bee",
+            "title": "jeans.jpg",
+            "created_by": "blt01fbcccbf9d25d37",
+            "updated_by": "blt01fbcccbf9d25d37",
+            "created_at": "2026-02-01T14:50:10.098Z",
+            "updated_at": "2026-02-01T14:50:10.098Z",
+            "content_type": "image/jpeg",
+            "file_size": "975090",
+            "filename": "jeans.jpg",
+            "ACL": {},
+            "is_dir": false,
+            "tags": [],
+            "publish_details": {
+              "time": "2026-02-21T14:08:16.880Z",
+              "user": "blt01fbcccbf9d25d37",
+              "environment": "blt4c2aa25b3263bee6",
+              "locale": "en-us"
+            },
+            "url": "https://dev14-images.csnonprod.com/v3/assets/blt646e916fcf4fef2f/blt45af74fc2e01f7e7/697f682299c8e60f10817aa7/jeans.jpg"
+          },
+          "cta_label": "Shop New Arrivals",
+          "cta_link": {
+            "title": "Shop New Arrivals",
+            "href": "/new-arrivals"
+          }
+        }
+      },
+      {
+        "featured_products": {
+          "title": "Best Sellers",
+          "_metadata": {
+            "uid": "csd26944fb4a0b7177"
+          },
+          "products": [
+            {
+              "uid": "blta5f8fe6fb032382f",
+              "_content_type_uid": "product"
+            },
+            {
+              "uid": "blt87bb73576f8108d3",
+              "_content_type_uid": "product"
+            },
+            {
+              "uid": "bltaccb79e2fd36e51a",
+              "_content_type_uid": "product"
+            },
+            {
+              "uid": "blte427f719a2efbfd3",
+              "_content_type_uid": "product"
+            },
+            {
+              "uid": "blt4fc2d58b708931f6",
+              "_content_type_uid": "product"
+            },
+            {
+              "uid": "blt8b2259721add58b3",
+              "_content_type_uid": "product"
+            }
+          ]
+        }
+      },
+      {
+        "image_text": {
+          "image": {
+            "uid": "blt4c66ac014d60ba4c",
+            "_version": 1,
+            "parent_uid": "bltde133697d85d2bee",
+            "title": "Shirts.jpg",
+            "created_by": "blt01fbcccbf9d25d37",
+            "updated_by": "blt01fbcccbf9d25d37",
+            "created_at": "2026-02-01T14:42:25.239Z",
+            "updated_at": "2026-02-01T14:42:25.239Z",
+            "content_type": "image/jpeg",
+            "file_size": "1425873",
+            "filename": "Shirts.jpg",
+            "ACL": {},
+            "is_dir": false,
+            "tags": [],
+            "publish_details": {
+              "time": "2026-02-21T14:08:16.590Z",
+              "user": "blt01fbcccbf9d25d37",
+              "environment": "blt4c2aa25b3263bee6",
+              "locale": "en-us"
+            },
+            "url": "https://dev14-images.csnonprod.com/v3/assets/blt646e916fcf4fef2f/blt4c66ac014d60ba4c/697f665199c8e6374b817aa3/Shirts.jpg"
+          },
+          "_metadata": {
+            "uid": "cs54f78fe24f1efd59"
+          },
+          "title": "Spring Layers, Made Easy",
+          "description": "From breathable linens to everyday tees, discover versatile pieces designed for effortless mix-and-match styling—weekday to weekend.",
+          "cta_label": "Explore the Spring Edit",
+          "cta_link": {
+            "title": "Explore the Spring Edit",
+            "href": "/collections/spring"
+          }
+        }
+      },
+      {
+        "collection_highlight": {
+          "title": "The Denim & Utility Collection",
+          "_metadata": {
+            "uid": "cs11c17cd09a489eb1"
+          },
+          "description": "Hardwearing denim and relaxed silhouettes in washed tones—perfect for street-ready looks and laid-back days.",
+          "products": [
+            {
+              "uid": "blte427f719a2efbfd3",
+              "_content_type_uid": "product"
+            },
+            {
+              "uid": "blt253924a4c802dce0",
+              "_content_type_uid": "product"
+            },
+            {
+              "uid": "blt61e065e35bf339fa",
+              "_content_type_uid": "product"
+            }
+          ]
+        }
+      }
+    ],
+    "page_title": "Modern essentials for every day.",
+    "seo": {
+      "title": "Aurum Apparel SEO",
+      "meta_title": "Aurum Apparel | Modern Clothing Essentials",
+      "meta_description": "Shop modern essentials at Aurum Apparel—premium shirts, tees, denim, and everyday staples. New arrivals weekly, easy returns, fast shipping.",
+      "keywords": [
+        "clothing",
+        "streetwear",
+        "shirts",
+        "t-shirts",
+        "denim",
+        "jeans",
+        "joggers",
+        "new arrivals",
+        "sale"
+      ],
+      "og_image": {
+        "uid": "bltbf75e955d6ac8c86",
+        "_version": 1,
+        "parent_uid": "bltde133697d85d2bee",
+        "title": "t-shirts.jpg",
+        "created_by": "blt01fbcccbf9d25d37",
+        "updated_by": "blt01fbcccbf9d25d37",
+        "created_at": "2026-02-01T14:50:10.146Z",
+        "updated_at": "2026-02-01T14:50:10.146Z",
+        "content_type": "image/jpeg",
+        "file_size": "993206",
+        "filename": "t-shirts.jpg",
+        "ACL": {},
+        "is_dir": false,
+        "tags": [],
+        "publish_details": {
+          "time": "2026-02-21T14:08:16.747Z",
+          "user": "blt01fbcccbf9d25d37",
+          "environment": "blt4c2aa25b3263bee6",
+          "locale": "en-us"
+        },
+        "url": "https://dev14-images.csnonprod.com/v3/assets/blt646e916fcf4fef2f/bltbf75e955d6ac8c86/697f6822245c8350e1c2e23f/t-shirts.jpg"
+      }
+    },
+    "tags": [],
+    "title": "Aurum Apparel — Home",
+    "updated_at": "2026-02-21T13:12:34.268Z",
+    "updated_by": "blt01fbcccbf9d25d37",
+    "url": "/",
+    "publish_details": {
+      "time": "2026-02-21T14:08:16.204Z",
+      "user": "blt01fbcccbf9d25d37",
+      "environment": "blt4c2aa25b3263bee6",
+      "locale": "en-us"
+    }
+  }
+]

@@ -1,0 +1,81 @@
+{
+    "uid": "bltdf9b155a6ba1861b",
+    "_version": 1,
+    "locale": "en-us",
+    "ACL": {},
+    "_in_progress": false,
+    "created_at": "2026-02-21T16:28:43.972Z",
+    "created_by": "blt01fbcccbf9d25d37",
+    "cta": {
+        "label": "",
+        "link": {
+            "title": "",
+            "href": ""
+        }
+    },
+    "logo": {
+        "uid": "bltf1589b5e9de942a6",
+        "_version": 1,
+        "parent_uid": null,
+        "title": "5_pakain.webp",
+        "created_by": "blt01fbcccbf9d25d37",
+        "updated_by": "blt01fbcccbf9d25d37",
+        "created_at": "2026-02-21T13:11:33.992Z",
+        "updated_at": "2026-02-21T13:11:33.992Z",
+        "content_type": "image/webp",
+        "file_size": "256784",
+        "filename": "5_pakain.webp",
+        "ACL": {},
+        "is_dir": false,
+        "tags": [],
+        "publish_details": {
+            "time": "2026-02-21T14:08:16.861Z",
+            "user": "blt01fbcccbf9d25d37",
+            "environment": "blt4c2aa25b3263bee6",
+            "locale": "en-us"
+        },
+        "url": "https://dev14-images.csnonprod.com/v3/assets/blt646e916fcf4fef2f/bltf1589b5e9de942a6/6999af0579bde8d275102848/5_pakain.webp"
+    },
+    "navigation_links": [
+        {
+            "label": "Home",
+            "link": {
+                "title": "Home",
+                "href": "/"
+            },
+            "_metadata": {
+                "uid": "cs3a90e5aab4dd4000"
+            }
+        },
+        {
+            "label": "About",
+            "link": {
+                "title": "About",
+                "href": "/about"
+            },
+            "_metadata": {
+                "uid": "csa1ef1804703f3df2"
+            }
+        },
+        {
+            "label": "Contact",
+            "link": {
+                "title": "Contact",
+                "href": "/contact"
+            },
+            "_metadata": {
+                "uid": "csbe42d69b76d41cd0"
+            }
+        }
+    ],
+    "tags": [],
+    "title": "Aurum Apparel",
+    "updated_at": "2026-02-21T16:28:43.972Z",
+    "updated_by": "blt01fbcccbf9d25d37",
+    "publish_details": {
+        "time": "2026-02-21T16:33:36.067Z",
+        "user": "blt01fbcccbf9d25d37",
+        "environment": "blt4c2aa25b3263bee6",
+        "locale": "en-us"
+    }
+}
