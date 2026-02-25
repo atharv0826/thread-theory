@@ -200,3 +200,52 @@ export const getProductsByCategory = async (categoryUid, locale = null) => {
   
   return [];
 };
+
+export const getPoliciesListingRes = async (locale = null) => {
+  try {
+    const response = await StackObj.getEntryByUid({
+      contentTypeUid: "policies_listing_page",
+      entryUid: "blt0cd04799096f849b",
+      referenceFieldPath: ["policies"],
+      jsonRtePath: [],
+      locale,
+    });
+
+    if (response) {
+      addEditableTags(response, "policies_listing_page", true, locale || "en-us");
+      return response;
+    }
+  } catch (error) {
+    console.error("Error fetching Policies Listing page:", error);
+  }
+  
+  return null;
+};
+
+export const getPolicyRes = async (url, locale = null) => {
+  try {
+    const response = await StackObj.getEntryByUrl({
+      contentTypeUid: "policy_page",
+      entryUrl: url,
+      referenceFieldPath: [],
+      jsonRtePath: [
+        "body_sections.rich_text_section.body"
+      ],
+      locale,
+    });
+      
+    if (response) {
+      const entries = Array.isArray(response[0]) ? response[0] : (Array.isArray(response) ? response : [response]);
+      const entry = entries?.[0];
+      
+      if (entry) {
+        addEditableTags(entry, "policy_page", true, locale || "en-us");
+        return entry;
+      }
+    }
+  } catch (error) {
+    console.error("Error fetching individual policy by url:", error);
+  }
+  
+  return null;
+};
