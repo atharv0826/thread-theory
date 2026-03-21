@@ -55,7 +55,7 @@ export default function About() {
           <div className="w-full aspect-video md:aspect-[21/9] bg-stone-100 rounded-2xl overflow-hidden relative mb-12 shadow-sm">
             <img 
               src={`${data.image.url}?format=webply&quality=85`}
-              alt={data.image.title || "About Aurum Apparel"}
+              alt={data.image.title || "About Thread Theory"}
               className="w-full h-full object-cover"
               {...(data.image.$?.url)}
             />

@@ -101,14 +101,20 @@ export default function Policy() {
                    return (
                      <div key={idx} className="prose prose-stone prose-lg max-w-none text-stone-700 leading-relaxed">
                        {block.rich_text_section.heading && (
-                         <h2 className="text-2xl md:text-3xl font-bold text-stone-900 mb-6 border-b border-stone-100 pb-4">
+                         <h2 
+                           className="text-2xl md:text-3xl font-bold text-stone-900 mb-6 border-b border-stone-100 pb-4"
+                           {...(block.rich_text_section.$?.heading)}
+                         >
                            {block.rich_text_section.heading}
                          </h2>
                        )}
                        
                        {/* The Utils.jsonToHTML modifies the object to include the raw HTML string if jsonRtePath is provided in API helper. If not, it falls back. */ }
                        {typeof block.rich_text_section.body === 'string' ? (
-                         <div dangerouslySetInnerHTML={{ __html: block.rich_text_section.body }} />
+                         <div 
+                           dangerouslySetInnerHTML={{ __html: block.rich_text_section.body }} 
+                           {...(block.rich_text_section.$?.body)}
+                         />
                        ) : (
                          <div className="bg-red-50 text-red-700 p-4 rounded-md text-sm font-medium">
                            Rich Text Parsing Error: Ensure `jsonRtePath` is configured in the Contentstack `api.js` loader.
