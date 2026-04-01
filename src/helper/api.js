@@ -63,7 +63,7 @@ export const getHeaderRes = async (locale = null) => {
   try {
     const response = await StackObj.getEntryByUid({
       contentTypeUid: "header_v2",
-      entryUid: "bltdf9b155a6ba1861b",
+      entryUid: import.meta.env.VITE_HEADER_V2_UID,
       referenceFieldPath: [],
       jsonRtePath: [],
       locale,
@@ -110,7 +110,7 @@ export const getFooterRes = async (locale = null) => {
   try {
     const response = await StackObj.getEntryByUid({
       contentTypeUid: "footer_v2",
-      entryUid: "bltda90f941da9b637c",
+      entryUid: import.meta.env.VITE_FOOTER_V2_UID,
       referenceFieldPath: [],
       jsonRtePath: [],
       locale,
@@ -131,7 +131,7 @@ export const getCollectionsRes = async (locale = null) => {
   try {
     const response = await StackObj.getEntryByUid({
       contentTypeUid: "collections",
-      entryUid: "blt7de23544cd2404d7",
+      entryUid: import.meta.env.VITE_COLLECTIONS_UID,
       referenceFieldPath: ["reference"],
       jsonRtePath: [],
       locale,
@@ -205,7 +205,7 @@ export const getPoliciesListingRes = async (locale = null) => {
   try {
     const response = await StackObj.getEntryByUid({
       contentTypeUid: "policies_listing_page",
-      entryUid: "blt0cd04799096f849b",
+      entryUid: import.meta.env.VITE_POLICIES_LISTING_UID,
       referenceFieldPath: ["policies"],
       jsonRtePath: [],
       locale,
