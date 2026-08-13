@@ -1,39 +1,64 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { SplitWords } from '../ui';
 
 export default function HeroSection({ data }) {
   return (
-    <section className="relative h-[80vh] w-full flex items-center justify-center overflow-hidden bg-stone-900 text-white">
-      {data.background_image && (
-         <div className="absolute inset-0 z-0">
-           <img 
-             src={`${data.background_image.url}?format=webply&quality=85`}
-             alt={data.background_image.title || "Hero background"} 
-             className="w-full h-full object-cover opacity-60 mix-blend-multiply"
-             {...(data.background_image.$?.url)}
-           />
-           <div className="absolute inset-0 bg-gradient-to-t from-stone-900/80 via-transparent to-stone-900/40"></div>
-         </div>
-      )}
-      
-      <div className="relative z-10 text-center px-4 max-w-4xl mx-auto flex flex-col items-center">
-        <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6" {...(data.$?.heading)}>
-          {data.heading}
+    <section className="relative bg-paper overflow-hidden">
+      <div className="mx-auto max-w-400 px-6 lg:px-12 pt-12 md:pt-20 pb-16 md:pb-24">
+        {/* Oversized headline */}
+        <h1
+          className="relative z-10 font-serif tracking-tight leading-[0.9] text-ink text-[clamp(3.5rem,11.5vw,11.5rem)] mb-10 md:mb-0"
+          {...(data.$?.heading)}
+        >
+          <SplitWords text={data.heading} delay={150} step={90} italicLast />
         </h1>
-        {data.subheading && (
-          <p className="text-xl md:text-2xl text-stone-200 mb-10 max-w-2xl font-light" {...(data.$?.subheading)}>
-            {data.subheading}
-          </p>
-        )}
-        {data.cta_label && data.cta_link && (
-          <Link 
-            to={data.cta_link.href}
-            className="inline-flex items-center justify-center px-8 py-4 bg-white text-stone-900 text-sm font-bold uppercase tracking-widest hover:bg-stone-100 transition-colors"
-            {...(data.$?.cta_label)}
-          >
-            {data.cta_label}
-          </Link>
-        )}
+
+        <div className="grid grid-cols-12 gap-x-8 gap-y-12">
+          {/* Lede + CTA fill the left column */}
+          <div className="col-span-12 md:col-span-4 order-2 md:order-1 md:pt-16 flex flex-col items-start gap-10">
+            {data.subheading && (
+              <p
+                className="font-serif italic text-xl md:text-2xl leading-relaxed text-ink-soft max-w-sm opacity-0"
+                style={{ animation: 'page-in 1s cubic-bezier(0.22,1,0.36,1) 0.7s both' }}
+                {...(data.$?.subheading)}
+              >
+                {data.subheading}
+              </p>
+            )}
+
+            {data.cta_label && data.cta_link && (
+              <div className="opacity-0" style={{ animation: 'page-in 1s cubic-bezier(0.22,1,0.36,1) 0.9s both' }}>
+                <Link to={data.cta_link.href} className="btn-ink btn-solid" {...(data.$?.cta_label)}>
+                  {data.cta_label}
+                </Link>
+              </div>
+            )}
+
+            <div
+              className="hidden md:flex items-center gap-4 mt-auto pb-2 opacity-0"
+              style={{ animation: 'page-in 1s cubic-bezier(0.22,1,0.36,1) 1.2s both' }}
+              aria-hidden="true"
+            >
+              <span className="eyebrow">Scroll</span>
+              <span className="block w-16 h-px bg-ink/40" />
+            </div>
+          </div>
+
+          {/* Cover image, tucked up under the headline */}
+          <div className="col-span-12 md:col-span-8 order-1 md:order-2 relative overflow-hidden bg-cream aspect-4/5 sm:aspect-3/2 md:-mt-[clamp(2rem,5vw,6rem)] animate-unmask">
+            {data.background_image && (
+              <img
+                src={`${data.background_image.url}?format=webply&quality=85`}
+                alt={data.background_image.title || 'Hero'}
+                className="w-full h-full object-cover animate-kenburns"
+                {...(data.background_image.$?.url)}
+              />
+            )}
+            {/* paper scrim keeps the overlapping headline legible on any image */}
+            <div className="absolute inset-x-0 top-0 h-28 md:h-40 bg-linear-to-b from-paper/90 via-paper/35 to-transparent pointer-events-none" />
+          </div>
+        </div>
       </div>
     </section>
   );

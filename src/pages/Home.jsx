@@ -3,6 +3,7 @@ import Layout from '../components/layout';
 import RenderComponents from '../components/home/RenderComponents';
 import { getHomePageRes } from '../helper/api';
 import { onEntryChange } from '../sdk/entry';
+import { PageLoader, ErrorState } from '../components/ui';
 
 export default function Home() {
   const [data, setData] = useState(null);
@@ -31,22 +32,25 @@ export default function Home() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-stone-50">
-        <div className="animate-pulse flex flex-col items-center">
-           <div className="w-12 h-12 border-4 border-stone-200 border-t-stone-800 rounded-full animate-spin"></div>
-           <p className="mt-4 text-sm font-medium text-stone-500 uppercase tracking-widest">Loading Storefront...</p>
-        </div>
-      </div>
+      <Layout>
+        <PageLoader label="Opening the issue" />
+      </Layout>
     );
   }
 
   if (!data) {
-     return <div className="min-h-screen flex items-center justify-center bg-red-50 text-red-800">Failed to load Contentstack data.</div>;
+    return (
+      <Layout>
+        <ErrorState title="The page is blank">
+          <p>We couldn't load the storefront from Contentstack. Please try again shortly.</p>
+        </ErrorState>
+      </Layout>
+    );
   }
 
   return (
     <Layout>
-       <RenderComponents components={data.page_sections} />
+      <RenderComponents components={data.page_sections} />
     </Layout>
   );
 }

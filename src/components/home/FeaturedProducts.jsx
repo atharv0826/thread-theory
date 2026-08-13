@@ -1,51 +1,37 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Reveal, ProductCard } from '../ui';
 
 export default function FeaturedProducts({ data }) {
-  // Since we haven't fetched full product details yet, we'll mock the internal cards
-  // based on the uids we have from the response.
   return (
-    <section className="py-20 bg-white">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold tracking-tight mb-10 text-center" {...(data.$?.title)}>
-          {data.title}
-        </h2>
-        
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+    <section className="py-28 md:py-36 bg-paper">
+      <div className="mx-auto max-w-400 px-6 lg:px-12">
+        <div className="flex flex-wrap items-end justify-between gap-6 border-b border-line pb-8 mb-16 md:mb-24">
+          <Reveal as="h2" className="font-serif tracking-tight leading-none text-[clamp(2.25rem,5vw,4.5rem)]" {...(data.$?.title)}>
+            {data.title}
+          </Reveal>
+          <Reveal as="p" effect="fade" delay={200} className="eyebrow">
+            {String(data.products?.length || 0).padStart(2, '0')} pieces
+          </Reveal>
+        </div>
+
+        {/* Mirrored editorial rhythm: wide look / narrow portrait, alternating */}
+        <div className="grid grid-cols-12 gap-x-6 md:gap-x-8 gap-y-16 md:gap-y-28 items-end">
           {data.products?.map((product, idx) => {
-             // Handle referenced Product vs unresolved reference
-             const isResolved = product.title || product.product_name;
-             const productTitle = product.title || product.product_name || `Product Component (${product.uid?.substring(0,6)})`;
-             const productPrice = product.price ? `$${product.price.toFixed(2)}` : "$--.--";
-             // In the provided JSON, images are an array called product_images
-             const imageUrl = product.product_images?.[0]?.url || null;
-
-             const productUrl = product.url || `/#`;
-
-             return (
-               <Link to={productUrl} key={idx} className="group cursor-pointer block">
-                  <div className="aspect-[4/5] bg-stone-100 mb-4 overflow-hidden rounded-md relative" {...(product.$?.product_images)}>
-                     {imageUrl ? (
-                       <img 
-                         src={`${imageUrl}?format=webply&quality=85`} 
-                         alt={productTitle} 
-                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                       />
-                     ) : (
-                       <div className="w-full h-full flex items-center justify-center text-stone-400 font-medium text-center px-4">
-                         {isResolved ? "No Image" : "Product Component"}
-                       </div>
-                     )}
-                     <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors"></div>
-                  </div>
-                  <div className="space-y-1">
-                    <h3 className="text-sm font-medium text-stone-900 group-hover:underline underline-offset-4" {...(product.$?.title)}>
-                      {productTitle}
-                    </h3>
-                    <p className="text-sm text-stone-500" {...(product.$?.price)}>{productPrice}</p>
-                  </div>
-               </Link>
-             );
+            const wide = idx % 2 === 0;
+            const mirrored = idx % 4 >= 2;
+            return (
+              <Reveal
+                key={product.uid || idx}
+                delay={(idx % 2) * 150}
+                className={
+                  wide
+                    ? `col-span-12 md:col-span-7 ${mirrored ? 'md:order-2' : ''}`
+                    : `col-span-12 md:col-span-5 md:pb-24 ${mirrored ? 'md:order-1' : ''}`
+                }
+              >
+                <ProductCard product={product} index={idx} aspect={wide ? 'aspect-4/3' : 'aspect-3/4'} />
+              </Reveal>
+            );
           })}
         </div>
       </div>

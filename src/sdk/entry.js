@@ -80,6 +80,7 @@ export default {
       if (referenceFieldPath) query.includeReference(referenceFieldPath);
       if (locale) query.language(locale);
       query
+        .addQuery("r", String(Math.random())) // cache-buster
         .includeFallback()
         .toJSON()
         .find()
@@ -127,6 +128,7 @@ export default {
       }
       query
         .addQuery("include_applied_variants", "true")
+        .addQuery("r", String(Math.random())) // cache-buster
         .includeFallback()
         .toJSON();
       const data = query.where("url", `${entryUrl}`).find();
@@ -167,6 +169,7 @@ export default {
       const query = Stack.ContentType(contentTypeUid).Entry(entryUid);
       if (referenceFieldPath) query.includeReference(referenceFieldPath);
       if (locale) query.language(locale);
+      query.addParam("r", String(Math.random())); // cache-buster
       
       query.includeFallback().toJSON();
       

@@ -154,6 +154,7 @@ export const getCategoryRes = async (url, locale = null) => {
       .Query()
       .where('url', url)
       .language(locale || 'en-us')
+      .addQuery('r', String(Math.random())) // cache-buster
       .toJSON()
       .find();
       
@@ -181,6 +182,7 @@ export const getProductsByCategory = async (categoryUid, locale = null) => {
     productQuery
       .where("category.uid", categoryUid)
       .language(locale || 'en-us')
+      .addQuery("r", String(Math.random())) // cache-buster
       .includeReference("category");
 
     const response = await productQuery.toJSON().find();

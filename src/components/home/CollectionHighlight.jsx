@@ -1,56 +1,42 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Reveal, ProductCard } from '../ui';
 
 export default function CollectionHighlight({ data }) {
-  // Since we haven't fetched full product details yet, we'll mock the internal cards
+  const marqueeItems = Array.from({ length: 8 });
+
   return (
-    <section className="py-24 bg-stone-900 text-white">
-      <div className="container mx-auto px-4 text-center">
-        <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-6" {...(data.$?.title)}>
-          {data.title}
-        </h2>
-        {data.description && (
-          <p className="max-w-2xl mx-auto text-stone-400 text-lg md:text-xl font-light mb-16" {...(data.$?.description)}>
-            {data.description}
-          </p>
-        )}
-        
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          {data.products?.map((product, idx) => {
-             // Handle referenced Product vs unresolved reference
-             const isResolved = product.title || product.product_name;
-             const productTitle = product.title || product.product_name || `Content Data (${product.uid?.substring(0,6)})`;
-             const productPrice = product.price ? `$${product.price.toFixed(2)}` : "$--.--";
-             // In the provided JSON, images are an array called product_images
-             const imageUrl = product.product_images?.[0]?.url || null;
+    <section className="py-28 md:py-36 bg-ink text-paper overflow-hidden">
+      {/* Data-driven marquee strip */}
+      {data.title && (
+        <div className="border-y border-paper/15 py-5 mb-20 select-none" aria-hidden="true">
+          <div className="flex w-max animate-marquee whitespace-nowrap">
+            {marqueeItems.map((_, i) => (
+              <span key={i} className="font-serif italic text-3xl md:text-4xl text-paper/70 px-8 flex items-center gap-16">
+                {data.title} <span className="text-paper/30 not-italic text-xl">✦</span>
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
 
-             const productUrl = product.url || `/#`;
+      <div className="mx-auto max-w-400 px-6 lg:px-12">
+        <div className="max-w-3xl mb-20">
+          <Reveal as="h2" className="font-serif tracking-tight leading-[1.02] text-[clamp(2.5rem,6vw,5.5rem)] mb-8" {...(data.$?.title)}>
+            {data.title}
+          </Reveal>
+          {data.description && (
+            <Reveal as="p" delay={180} className="font-serif italic text-xl md:text-2xl text-paper/70 leading-relaxed" {...(data.$?.description)}>
+              {data.description}
+            </Reveal>
+          )}
+        </div>
 
-             return (
-               <Link to={productUrl} key={idx} className="group cursor-pointer block text-left">
-                  <div className="aspect-[3/4] bg-stone-800 mb-6 overflow-hidden relative" {...(product.$?.product_images)}>
-                     {imageUrl ? (
-                        <img 
-                          src={`${imageUrl}?format=webply&quality=85`} 
-                          alt={productTitle} 
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                        />
-                     ) : (
-                        <div className="w-full h-full flex items-center justify-center text-stone-500 font-medium text-center px-4">
-                          {isResolved ? "No Image" : "Collection Item"}
-                        </div>
-                     )}
-                     <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                  </div>
-                  <div className="space-y-2 px-2">
-                    <h3 className="text-base font-medium text-white group-hover:text-stone-300 transition-colors" {...(product.$?.title)}>
-                      {productTitle}
-                    </h3>
-                    <p className="text-sm text-stone-400" {...(product.$?.price)}>{productPrice}</p>
-                  </div>
-               </Link>
-             )
-          })}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-x-8 gap-y-16">
+          {data.products?.map((product, idx) => (
+            <Reveal key={product.uid || idx} delay={idx * 140} className={idx === 1 ? 'sm:mt-20' : ''}>
+              <ProductCard product={product} index={idx} dark />
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>

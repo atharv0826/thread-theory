@@ -3,23 +3,25 @@ import { useLocation, Link } from 'react-router-dom';
 import { getProductRes } from '../helper/api';
 import { onEntryChange } from '../sdk/entry';
 import Layout from '../components/layout';
+import { Reveal, PageLoader, ErrorState, ProductCard } from '../components/ui';
 
 export default function Product() {
   const { pathname } = useLocation();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [size, setSize] = useState(null);
 
   async function fetchData() {
     try {
       setLoading(true);
-      // Execute the API query based purely on the exact route URL 
+      // Execute the API query based purely on the exact route URL
       const response = await getProductRes(pathname);
-      
+
       if (!response) {
         throw new Error('Product not found');
       }
-      
+
       setData(response);
     } catch (err) {
       console.error("Error fetching product page:", err);
@@ -39,9 +41,7 @@ export default function Product() {
   if (loading) {
     return (
       <Layout>
-        <div className="flex items-center justify-center min-h-[60vh]">
-          <div className="w-8 h-8 border-4 border-stone-200 border-t-stone-800 rounded-full animate-spin" />
-        </div>
+        <PageLoader label="Fitting the piece" />
       </Layout>
     );
   }
@@ -49,134 +49,125 @@ export default function Product() {
   if (error || !data) {
     return (
       <Layout>
-        <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
-          <h1 className="text-3xl font-bold mb-4">Product Not Found</h1>
-          <p className="text-stone-600">We couldn't find the product you're looking for.</p>
-        </div>
+        <ErrorState title="Piece not found">
+          <p>We couldn't find the product you're looking for.</p>
+        </ErrorState>
       </Layout>
     );
   }
 
   const title = data.title || data.product_name;
-  const price = data.price ? `$${data.price.toFixed(2)}` : "$--.--";
-  const imageUrl = data.product_images?.[0]?.url;
+  const price = data.price != null ? `$${data.price.toFixed(2)}` : '$ —';
+  const images = data.product_images || [];
 
   return (
     <Layout>
-      <div className="container mx-auto px-4 py-16 md:py-24 max-w-6xl">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
-          
-          {/* Product Image Gallery */}
-          <div className="flex flex-col gap-4">
-            <div className="aspect-[4/5] bg-stone-100 rounded-xl overflow-hidden relative shadow-sm" {...(data.$?.product_images)}>
-              {imageUrl ? (
-                <img 
-                  src={`${imageUrl}?format=webply&quality=85`}
-                  alt={title}
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <div className="w-full h-full flex items-center justify-center text-stone-400">
-                  No Image Available
-                </div>
-              )}
-            </div>
-            {/* Thumbnail strip mockup, taking images from product_images if available */}
-            {data.product_images?.length > 1 && (
-              <div className="grid grid-cols-4 gap-4">
-                {data.product_images.slice(1, 5).map((img, idx) => (
-                  <div key={idx} className="aspect-square bg-stone-100 rounded-md overflow-hidden cursor-pointer hover:opacity-80 transition-opacity">
-                    <img src={`${img.url}?format=webply&quality=85`} className="w-full h-full object-cover" alt="" />
-                  </div>
-                ))}
+      <div className="mx-auto max-w-400 px-6 lg:px-12 py-12 md:py-20">
+        {/* Breadcrumb */}
+        <nav className="flex items-center gap-3 eyebrow mb-12">
+          <Link to="/" className="hover:text-ink transition-colors">Home</Link>
+          <span className="text-line">/</span>
+          <Link to="/collections" className="hover:text-ink transition-colors">Collections</Link>
+          <span className="text-line">/</span>
+          <span className="text-ink truncate max-w-40">{title}</span>
+        </nav>
+
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-20 items-start">
+          {/* Stacked editorial gallery */}
+          <div className="md:col-span-7 flex flex-col gap-6" {...(data.$?.product_images)}>
+            {images.length > 0 ? (
+              images.map((img, idx) => (
+                <Reveal
+                  key={idx}
+                  effect="mask"
+                  className={`overflow-hidden bg-cream ${idx === 0 ? 'aspect-4/5' : 'aspect-square'}`}
+                >
+                  <img
+                    src={`${img.url}?format=webply&quality=85`}
+                    alt={`${title} — view ${idx + 1}`}
+                    loading={idx === 0 ? 'eager' : 'lazy'}
+                    className="w-full h-full object-cover"
+                  />
+                </Reveal>
+              ))
+            ) : (
+              <div className="aspect-4/5 bg-cream flex items-center justify-center font-serif italic text-mist">
+                Image to come
               </div>
             )}
           </div>
 
-          {/* Product Info */}
-          <div className="flex flex-col justify-start">
-            <nav className="text-sm text-stone-500 mb-6 flex gap-2">
-              <span>Home</span>
-              <span>/</span>
-              <span>Products</span>
-              <span>/</span>
-              <span className="text-stone-900 font-medium truncate">{title}</span>
-            </nav>
+          {/* Sticky info column */}
+          <div className="md:col-span-5 md:sticky md:top-32">
+            <Reveal effect="line" className="w-16 h-px bg-ink mb-10" />
 
-            <h1 className="text-4xl lg:text-5xl font-bold tracking-tight text-stone-900 mb-4" {...(data.$?.title)}>
+            <Reveal
+              as="h1"
+              delay={80}
+              className="font-serif tracking-tight leading-[1.02] text-[clamp(2.5rem,4vw,4rem)] mb-6"
+              {...(data.$?.title)}
+            >
               {title}
-            </h1>
-            
-            <p className="text-2xl text-stone-700 mb-8 font-medium" {...(data.$?.price)}>
-              {price}
-            </p>
+            </Reveal>
 
-            <div className="prose prose-stone text-stone-600 mb-10 leading-relaxed" {...(data.$?.description)}>
-              {data.description && <div dangerouslySetInnerHTML={{ __html: data.description }} />}
-            </div>
+            <Reveal as="p" delay={160} className="font-serif italic text-2xl text-ink-soft mb-10" {...(data.$?.price)}>
+              {price}
+            </Reveal>
+
+            {data.description && (
+              <Reveal delay={240} className="editorial-prose text-base! border-t border-line pt-8 mb-10" {...(data.$?.description)}>
+                <div dangerouslySetInnerHTML={{ __html: data.description }} />
+              </Reveal>
+            )}
 
             {/* Mocked Add to Cart UI */}
-            <div className="space-y-6 pt-8 border-t border-stone-200">
+            <Reveal delay={320} className="border-t border-line pt-8 space-y-8">
               <div>
-                <h3 className="text-sm font-medium text-stone-900 mb-3">Size</h3>
+                <p className="eyebrow mb-4">Size</p>
                 <div className="flex gap-3">
-                  {['S', 'M', 'L', 'XL'].map(size => (
-                    <button key={size} className="w-12 h-12 flex items-center justify-center border border-stone-200 rounded-md hover:border-stone-900 transition-colors font-medium">
-                      {size}
+                  {['S', 'M', 'L', 'XL'].map((s) => (
+                    <button
+                      key={s}
+                      onClick={() => setSize(s)}
+                      aria-pressed={size === s}
+                      className={`w-12 h-12 flex items-center justify-center border text-sm font-medium transition-all duration-300 cursor-pointer ${
+                        size === s
+                          ? 'bg-ink text-paper border-ink'
+                          : 'border-line hover:border-ink'
+                      }`}
+                    >
+                      {s}
                     </button>
                   ))}
                 </div>
               </div>
 
-              <button className="w-full bg-stone-900 text-white py-4 rounded-md font-medium hover:bg-stone-800 transition-colors cursor-pointer">
-                Add to Cart
+              <button className="btn-ink btn-solid w-full">
+                Add to cart {size ? `— ${size}` : ''}
               </button>
-              
-              <p className="text-xs text-stone-500 text-center uppercase tracking-wide">
-                Free shipping on orders over $150
-              </p>
-            </div>
-            
-          </div>
 
+              <p className="eyebrow text-center">Free shipping on orders over $150</p>
+            </Reveal>
+          </div>
         </div>
 
-        {/* You May Also Like Section */}
+        {/* Related pieces */}
         {data.related_products && data.related_products.length > 0 && (
-          <div className="mt-24 mb-10">
-            <h2 className="text-2xl md:text-3xl font-bold text-stone-900 mb-10 tracking-tight text-center">You May Also Like</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          <section className="mt-32">
+            <Reveal className="flex items-baseline justify-between border-b border-line pb-6 mb-16">
+              <h2 className="font-serif tracking-tight text-3xl md:text-4xl">You may also like</h2>
+              <p className="eyebrow">{String(data.related_products.length).padStart(2, '0')} pieces</p>
+            </Reveal>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16">
               {data.related_products.map((product, idx) => (
-                <Link key={idx} to={product.url || `/products/${product.slug}`} className="group block h-full">
-                  <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-stone-100 h-full flex flex-col transform group-hover:-translate-y-1">
-                    <div className="aspect-[4/5] bg-stone-100 relative overflow-hidden">
-                      {product.product_images?.[0]?.url ? (
-                        <img 
-                          src={`${product.product_images[0].url}?format=webply&quality=85`} 
-                          alt={product.title || product.product_name || 'Related Product'} 
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out" 
-                        />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center text-stone-300">
-                          <span className="text-sm font-medium">No Image</span>
-                        </div>
-                      )}
-                    </div>
-                    <div className="p-6 flex flex-col flex-grow">
-                      <h3 className="text-lg font-bold text-stone-900 mb-2 group-hover:text-stone-600 transition-colors line-clamp-2">
-                        {product.title || product.product_name}
-                      </h3>
-                      <p className="text-stone-500 font-medium mt-auto">
-                        {product.price ? `$${product.price.toFixed(2)}` : 'Pricing Unavailable'}
-                      </p>
-                    </div>
-                  </div>
-                </Link>
+                <Reveal key={product.uid || idx} delay={(idx % 4) * 120}>
+                  <ProductCard product={product} index={idx} />
+                </Reveal>
               ))}
             </div>
-          </div>
+          </section>
         )}
-
       </div>
     </Layout>
   );
