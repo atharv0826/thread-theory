@@ -4,7 +4,7 @@ import GlobalHeader from './Header';
 import { getFooterRes } from '../../helper/api';
 import { onEntryChange } from '../../sdk/entry';
 
-export default function Layout({ children }) {
+export default function Layout({ children, loading = false }) {
   const CACHE_KEY = "global_footer_data";
   const [footer, setFooter] = useState(() => {
     const cached = localStorage.getItem(CACHE_KEY);
@@ -34,7 +34,7 @@ export default function Layout({ children }) {
         {children}
       </main>
 
-      {footer ? (
+      {loading ? null : footer ? (
         <footer className="bg-ink text-paper mt-32 overflow-hidden">
           <div className="mx-auto max-w-400 px-6 lg:px-12">
             {/* Giant masthead */}

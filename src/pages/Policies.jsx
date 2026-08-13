@@ -29,7 +29,7 @@ export default function Policies() {
 
   if (loading) {
     return (
-      <Layout>
+      <Layout loading>
         <PageLoader label="Reading the fine print" />
       </Layout>
     );

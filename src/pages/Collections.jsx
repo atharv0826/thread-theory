@@ -30,7 +30,7 @@ export default function Collections() {
 
   if (loading) {
     return (
-      <Layout>
+      <Layout loading>
         <PageLoader label="Curating the index" />
       </Layout>
     );

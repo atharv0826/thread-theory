@@ -56,7 +56,7 @@ export function SplitWords({ text, step = 80, delay = 0, italicLast = false, ...
 
 export function PageLoader({ label = 'Loading' }) {
   return (
-    <div className="min-h-[70vh] flex flex-col items-center justify-center gap-8 bg-paper">
+    <div className="min-h-[calc(100svh-5rem)] flex flex-col items-center justify-center gap-8 bg-paper">
       <span className="font-serif italic text-3xl tracking-tight">Thread Theory</span>
       <div className="loader-line" />
       <span className="eyebrow">{label}</span>

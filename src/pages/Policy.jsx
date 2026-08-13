@@ -31,7 +31,7 @@ export default function Policy() {
 
   if (loading) {
     return (
-      <Layout>
+      <Layout loading>
         <PageLoader label="Reading the fine print" />
       </Layout>
     );

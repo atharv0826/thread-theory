@@ -32,7 +32,7 @@ export default function Home() {
 
   if (loading) {
     return (
-      <Layout>
+      <Layout loading>
         <PageLoader label="Opening the issue" />
       </Layout>
     );

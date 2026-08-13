@@ -40,7 +40,7 @@ export default function Product() {
 
   if (loading) {
     return (
-      <Layout>
+      <Layout loading>
         <PageLoader label="Fitting the piece" />
       </Layout>
     );

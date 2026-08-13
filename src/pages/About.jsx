@@ -28,7 +28,7 @@ export default function About() {
 
   if (loading) {
     return (
-      <Layout>
+      <Layout loading>
         <PageLoader label="Turning the page" />
       </Layout>
     );

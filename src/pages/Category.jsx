@@ -46,7 +46,7 @@ export default function Category() {
 
   if (loading) {
     return (
-      <Layout>
+      <Layout loading>
         <PageLoader label="Laying out the rail" />
       </Layout>
     );

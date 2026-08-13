@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useLayoutEffect } from 'react'
 import ReactDOM from 'react-dom/client'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { LivePreviewProvider } from './context/live-preview-context-provider'
 import Home from './pages/Home'
 import About from './pages/About'
@@ -11,9 +11,19 @@ import Policies from './pages/Policies'
 import Policy from './pages/Policy'
 import './index.css'
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useLayoutEffect(() => {
+    // 'instant' bypasses the global smooth scroll-behavior
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [pathname]);
+  return null;
+}
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
+      <ScrollToTop />
       <LivePreviewProvider>
         <Routes>
           <Route path="/" element={<Home />} />
