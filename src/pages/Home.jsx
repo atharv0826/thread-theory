@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import Layout from '../components/layout';
 import RenderComponents from '../components/home/RenderComponents';
 import { getHomePageRes } from '../helper/api';
-import { onEntryChange } from '../sdk/entry';
+import { useLivePreviewCtx } from '../context/live-preview-context-provider';
 import { PageLoader, ErrorState } from '../components/ui';
 
 export default function Home() {
+  const lpTs = useLivePreviewCtx();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -21,14 +22,8 @@ export default function Home() {
   }
 
   useEffect(() => {
-    // Initial fetch
     fetchData();
-
-    // Setup live preview listener
-    onEntryChange(() => {
-      fetchData();
-    });
-  }, []);
+  }, [lpTs]);
 
   if (loading) {
     return (

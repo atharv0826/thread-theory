@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getPoliciesListingRes } from '../helper/api';
-import { onEntryChange } from '../sdk/entry';
+import { useLivePreviewCtx } from '../context/live-preview-context-provider';
 import Layout from '../components/layout';
 import { Reveal, SplitWords, PageLoader, ErrorState } from '../components/ui';
 
 export default function Policies() {
+  const lpTs = useLivePreviewCtx();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -22,10 +23,7 @@ export default function Policies() {
 
   useEffect(() => {
     fetchData();
-    onEntryChange(() => {
-      fetchData();
-    });
-  }, []);
+  }, [lpTs]);
 
   if (loading) {
     return (

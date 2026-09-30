@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Layout from '../components/layout';
 import { getCategoryRes, getProductsByCategory } from '../helper/api';
-import { onEntryChange } from '../sdk/entry';
+import { useLivePreviewCtx } from '../context/live-preview-context-provider';
 import { Reveal, SplitWords, PageLoader, ErrorState, ProductCard } from '../components/ui';
 
 export default function Category() {
+  const lpTs = useLivePreviewCtx();
   const { slug } = useParams();
   const [category, setCategory] = useState(null);
   const [products, setProducts] = useState([]);
@@ -39,10 +40,7 @@ export default function Category() {
 
   useEffect(() => {
     fetchData();
-    onEntryChange(() => {
-      fetchData();
-    });
-  }, [slug]);
+  }, [slug, lpTs]);
 
   if (loading) {
     return (

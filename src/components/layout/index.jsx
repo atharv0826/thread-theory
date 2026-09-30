@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import GlobalHeader from './Header';
 import { getFooterRes } from '../../helper/api';
-import { onEntryChange } from '../../sdk/entry';
+import { useLivePreviewCtx } from '../../context/live-preview-context-provider';
 
 export default function Layout({ children, loading = false }) {
+  const lpTs = useLivePreviewCtx();
   const CACHE_KEY = "global_footer_data";
   const [footer, setFooter] = useState(() => {
     const cached = localStorage.getItem(CACHE_KEY);
@@ -21,10 +22,7 @@ export default function Layout({ children, loading = false }) {
 
   useEffect(() => {
     fetchFooter();
-    onEntryChange(() => {
-      fetchFooter();
-    });
-  }, []);
+  }, [lpTs]);
 
   return (
     <div className="min-h-screen flex flex-col bg-paper text-ink">

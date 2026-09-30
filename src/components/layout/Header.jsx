@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { getHeaderRes } from '../../helper/api';
-import { onEntryChange } from '../../sdk/entry';
+import { useLivePreviewCtx } from '../../context/live-preview-context-provider';
 
 export default function GlobalHeader() {
+  const lpTs = useLivePreviewCtx();
   const [header, setHeader] = useState(null);
   const [loading, setLoading] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -22,10 +23,7 @@ export default function GlobalHeader() {
 
   useEffect(() => {
     fetchData();
-    onEntryChange(() => {
-      fetchData();
-    });
-  }, []);
+  }, [lpTs]);
 
   useEffect(() => {
     setMenuOpen(false);
