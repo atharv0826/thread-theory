@@ -15,6 +15,7 @@ export default function Product() {
   async function fetchData() {
     try {
       setLoading(true);
+      setError(null);
       // Execute the API query based purely on the exact route URL
       const response = await getProductRes(pathname);
 
