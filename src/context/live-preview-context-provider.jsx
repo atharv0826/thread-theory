@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import ContentstackLivePreview from "@contentstack/live-preview-utils";
 import { onEntryChange } from "../sdk/entry";
 
 const LivePreviewContext = createContext(null);
@@ -9,7 +10,15 @@ export const LivePreviewProvider = ({ children }) => {
   const [lpTs, setLpTs] = useState(0);
 
   useEffect(() => {
-    onEntryChange(() => setLpTs((n) => n + 1), { skipInitialRender: true });
+    // Visual Builder URLs (?live_preview&builder) make the SDK fire the callback
+    // synchronously on register despite skipInitialRender; the mount fetch already
+    // used that hash, so ignore that call.
+    let registering = true;
+    const id = onEntryChange(() => !registering && setLpTs((n) => n + 1), {
+      skipInitialRender: true,
+    });
+    registering = false;
+    return () => ContentstackLivePreview.unsubscribeOnEntryChange(id);
   }, []);
 
   return (
